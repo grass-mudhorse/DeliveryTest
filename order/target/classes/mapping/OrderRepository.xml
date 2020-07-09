@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.repository.OrderRepository">
+
+	<insert id="save" parameterType="Order" keyProperty="orderid" useGeneratedKeys="true">
+		insert into t_order(RestaurantID,StoreName,UserID,Date,TotalPrice,State,Note,Address,ArrivingTime) values(#{restaurantid},#{storename},#{userid},#{date},#{totalprice},#{state},#{note},#{address},#{arrivingtime})
+	</insert>
+
+	<select id="findAll" resultType="Order">
+		select * from t_order
+	</select>
+
+	<select id="findAllByUid" resultType="Order">
+		select * from t_order where UserID = #{param1} order by OrderID desc
+	</select>
+
+
+
+	<select id="findByOid" resultType="Order">
+		select * from t_order where OrderID = #{param1}
+	</select>
+
+	<update id="updateState" parameterType="int">
+		update t_order set State = #{state} where OrderID = #{oid}
+	</update>
+
+	<update id="receiveAction" >
+		update t_order set State = 4 where OrderID = #{param1}
+	</update>
+
+	<update id="commentAction" >
+		update t_order set State = 5 where OrderID = #{param1}
+	</update>
+
+	<select id="findAllByRid" resultType="Order">
+		select * from t_order where RestaurantID = #{param1} limit #{page},#{limit}
+	</select>
+
+	<select id="findAnOrder" resultType="Order">
+		select * from t_order where OrderID = #{oid}
+	</select>
+
+</mapper>

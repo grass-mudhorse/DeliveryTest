@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.repository.ReviewRepository">
+    <select id="findReviewByRestaurantId" resultType="Review">
+        select * from t_review where restaurantid = #{param1} limit #{param2},#{param3}
+    </select>
+
+    <select id="findByRestId" resultType="Review">
+        select * from t_review where reviewid = #{param1}
+    </select>
+
+    <insert id="save" parameterType="Review">
+		insert into t_review(OrderID,RestaurantID,Nickname,Date,Rating,Content) values(#{orderid},#{restaurantid},#{nickname},#{date},#{rating},#{content})
+	</insert>
+    <select id="deleteByReviewId" parameterType="long">
+        delete from t_review where ReviewID = #{reviewid}
+    </select>
+</mapper>

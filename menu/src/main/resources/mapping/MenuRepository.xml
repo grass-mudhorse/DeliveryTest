@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sirius.repository.MenuRepository">
+
+
+    <select id="findAll" resultType="Menu">
+		select * from t_menu limit #{param1},#{param2}
+	</select>
+
+	<select id="count" resultType="int">
+		select count(id) from t_menu;
+	</select>
+
+
+	<select id="findByRestaurantName" resultType="Menu">
+		select * from t_menu where StoreName = #{rname} limit #{page},#{limit}
+	</select>
+
+	<select id="findMenuByRestName" resultType="Menu">
+		select * from t_menu where StoreName = #{rname}
+	</select>
+
+	<select id="findAllByMId" parameterType="int" resultType="Menu">
+		select * from t_menu where MenuID = #{id}
+	</select>
+
+	<select id="findMenu" resultType="Menu">
+		select menuid,storename,menuname,description,materials,price,stocks,menutype,photo from t_menu where storename = #{param1} and menuname like "%"#{param2}"%"
+	</select>
+
+	<delete id="deleteByName" parameterType="String" >
+		delete from t_menu where StoreName = #{param1} and MenuName = #{param2}
+	</delete>
+
+	<insert id="save" parameterType="Menu">
+		insert into t_menu(storename,menuname,menutype,price,stocks,description,photo,materials) values(#{storename},#{menuname},#{menutype},#{price},#{stocks},#{description},#{photo},#{materials})
+	</insert>
+
+	<update id="update" parameterType="Menu">
+		update t_menu set menuname = #{menuname},menutype = #{menutype},price = #{price},stocks = #{stocks},description = #{description},photo = #{photo},materials = #{materials} where menuid = #{menuid}
+	</update>
+
+
+
+
+<!--	<resultMap id="menuMap" type="Menu">-->
+<!--		<id property="MenuID" column="mid"/>-->
+<!--		<result property="Name" column="mname"/>-->
+<!--		<result property="Stocks" column="Stocks"/>-->
+<!--		<result property="Price" column="Price"/>-->
+<!--		<result property="Description" column="Description"/>-->
+<!--		&lt;!&ndash; 映射type &ndash;&gt;-->
+<!--		<association property="restaurant" javaType="Restaurant">-->
+<!--			<id property="RestaurantID" column="rid"/>-->
+<!--			<result property="StoreName" column="rname"/>-->
+<!--		</association>-->
+<!--	</resultMap>-->
+
+<!--	<select id="findAll" resultMap="menuMap">-->
+<!--		select m.MenuID mid,m.Name mname,m.Price,m.Stocks,m.Description,r.RestaurantID rid,r.StoreName rname from t_menu m,t_restaurant r where m.RestaurantID = r.RestaurantID order by mid limit #{param1},#{param2}-->
+<!--	</select>-->
+
+<!--	<select id="count" resultType="int">-->
+<!--		select count(*) from t_menu;-->
+<!--	</select>-->
+
+<!--	<insert id="save" parameterType="Menu">-->
+<!--		insert into t_menu(name,price,flavor,tid) values(#{name},#{price},#{flavor},#{type.id})-->
+<!--	</insert>-->
+
+<!--	<select id="findById" resultMap="menuMap">-->
+<!--		select id mid,name mname,price,flavor,tid from t_menu where id = #{id}-->
+<!--	</select>-->
+
+
+
+
+</mapper>
