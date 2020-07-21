@@ -34,6 +34,14 @@ public class AccountHandler {
     public String port(){
         return this.port;
     }
+    
+    @Value("${application.message}")
+    private String message;
+
+    @GetMapping("/hello")
+    public String hello() {
+        return message + '\n';
+    }
 
     @GetMapping("login/{username}/{password}/{type}")
     public Object login(@PathVariable("username") String username,@PathVariable("password") String password,@PathVariable("type") String type){
