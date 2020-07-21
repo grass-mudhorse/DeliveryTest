@@ -40,12 +40,20 @@
             <scope>provided</scope>
         </dependency>
              
-        <dependency>
-             <groupId>com.microsoft.azure</groupId>
-             <artifactId>spring-cloud-starter-azure-spring-cloud-client</artifactId>
-             <version>2.1.2</version>
-        </dependency>
     </dependencies>
+         
+      <profiles>
+        <profile>
+            <id>cloud</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.microsoft.azure</groupId>
+                    <artifactId>spring-cloud-starter-azure-spring-cloud-client</artifactId>
+                    <version>2.2.0</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <dependencyManagement>
         <dependencies>
