@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: account
-  profiles:
-    active: dev
-  cloud:
-    config:
-      uri: https://github.com/grass-mudhorse/config-test
-      fail-fast: true
